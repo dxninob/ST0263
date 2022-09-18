@@ -13,7 +13,7 @@ Desarrollar habilidades en el proceso de creación, despliegue y gestión de apl
 ## 1.1. Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor
 - Desplegar un servidor de wordpress en una máquina virtual usando contenedores Docker.
 - Asignarle un nombre de dominio a la dirección IP elástica del servidor.
-- Asgnarle al nombre de dominio del servidor, un certificado ssl válido.
+- Asignarle al nombre de dominio del servidor, un certificado ssl válido.
 
 
 ## 1.2. Que aspectos NO cumplió o desarrolló de la actividad propuesta por el profesor
@@ -21,21 +21,21 @@ Todo lo propuesto ha sido implementado.
 
 
 # 2. Información general de diseño
-Se usaron contenedores Docker para la intalación de Wordpress en la máquina virtual.
+Se usaron contenedores Docker para la instalación de Wordpress en la máquina virtual.
 
 
 # 3. Descripción del ambiente de desarrollo, técnico y de ejecución
 ## IP o nombres de dominio
 - IP elástica: 35.209.90.230
 - Nombre de dominio: danielanino.tk
-- Dominio con certificación SSL: https://www.danielanino.tk
+- Dominio con certificación ssl: https://www.danielanino.tk
 
 
 ## Detalles técnicos
 - GCP: se usó para desplegar una máquina virtual.
 - Docker: se usó un contenedor para desplegar un wordpress.
-- Cerbot: se usó para asiganar un certificado SSL válido.
-- Let's Encrypt: se usó para asiganar un certificado SSL válido.
+- Cerbot: se usó para asiganar un certificado ssl válido.
+- Let's Encrypt: se usó para asiganar un certificado ssl válido.
 - Nginx: se usó como servidor web HTTP.
 
 
@@ -84,6 +84,7 @@ Para ingresar a la máquina virtual, nos debemos conectar por SSH:
 - Se da click en *Compute Engine*.
 - Se da click en *Instancias de VM*.
 - Buscamos nuestra instancia y damos click en *SSH*.
+<img width="731" alt="Captura" src="https://user-images.githubusercontent.com/60080916/190928740-5c0c5b2f-9a53-47d3-9a5d-7865409a3ef3.PNG">
 
 
 ## Detalles del desarrollo
@@ -133,13 +134,13 @@ sudo nginx -t
 sudo service nginx reload
 ```
 
-### Pedir los certificados SSL
+### Pedir los certificados ssl
 Ejecutamos los siguientes comandos:
 ```
 sudo letsencrypt certonly -a webroot --webroot-path=/var/www/letsencrypt -m dxninob@eafit.edu.co --agree-tos -d www.danielanino.tk
 sudo certbot --server https://acme-v02.api.letsencrypt.org/directory -d *.danielanino.tk --manual --preferred-challenges dns-01 certonly
 ```
-Cuando ejecutamos este último comando, tenemos que crear el registro TXT como se explica más adelante.
+- **Nota:** Cuando ejecutamos este último comando, tenemos que crear el registro TXT como se explicó anteriormente.
 
 Creamos carpetas para nuestro wordpress y los certficados:
 ```
@@ -200,12 +201,15 @@ El usuario solo debe acceder a la URL https://www.danielanino.tk desde cualquier
 
 ## Resultados
 Podemos ver que la URL empieza por https://
+
 <img width="960" alt="5 pagina" src="https://user-images.githubusercontent.com/60080916/190926718-9cf081d5-0530-446b-98c3-e3f326e90367.PNG">
 
-Podemos ver el certificado SSL:
-<img width="960" alt="6 ssl" src="https://user-images.githubusercontent.com/60080916/190926736-a28dfcd8-6c93-40ff-80af-0e7b0c99ac5c.PNG">
+Podemos ver el certificado ssl
+
+<img width="960" alt="6 ssl" src="https://user-images.githubusercontent.com/60080916/190926736-a28dfcd8-6c93-40ff-80af-0e7b0c99ac5c.PNG">  
 
 
 # 5. Información relevante
 ## Referencias:
-https://github.com/st0263eafit/st0263-2022-2/tree/main/docker-nginx-wordpress-ssl-letsencrypt
+https://github.com/st0263eafit/st0263-2022-2/tree/main/docker-nginx-wordpress-ssl-letsencrypt  
+https://www.youtube.com/watch?v=N3xWxZt8x2s
