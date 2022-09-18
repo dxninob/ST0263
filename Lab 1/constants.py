@@ -1,0 +1,8 @@
+# Constants....
+
+PORT = 80
+ENCONDING_FORMAT = "utf-8"
+RECV_BUFFER_SIZE = 2048
+IP_SERVER = '0.0.0.0'
+DOCUMENT_ROOT = 'recursos/'
+ELASTIC_IP = '174.129.206.167'
