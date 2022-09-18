@@ -20,11 +20,11 @@ Desarrollar habilidades en el proceso de creación, despliegue y gestión de apl
 Todo lo propuesto ha sido implementado.
 
 
-# 2. Información general de diseño de alto nivel, arquitectura, patrones, mejores prácticas utilizadas.
+# 2. Información general de diseño
 Se usaron contenedores Docker para la intalación de Wordpress en la máquina virtual.
 
 
-# 3. Descripción del ambiente de desarrollo, técnico y de ejecución: lenguaje de programación, librerias, paquetes, etc, con sus numeros de versiones.
+# 3. Descripción del ambiente de desarrollo, técnico y de ejecución
 ## IP o nombres de dominio
 - IP elástica: 35.209.90.230
 - Nombre de dominio: danielanino.tk
@@ -48,6 +48,7 @@ Crear una instancia en GCP:
 - Se da click en *CREAR INSTANCIA*.
 - Se configura el nombre de la instancia, se elige el tipo de máquina ec2-micro y se habilita el tráfico HTTP y HTTPS.
 - Se da click en *CREAR*.
+<img width="728" alt="1 instancia" src="https://user-images.githubusercontent.com/60080916/190926653-de1c6c03-bd2d-4d93-8b30-ba88342398d5.PNG">
 
 Configurar la IP elástica de la máquina virtual:
 - Se ingresa a GCP (console.cloud.google.com).
@@ -57,6 +58,7 @@ Configurar la IP elástica de la máquina virtual:
 - Se da click en *RESERVAR DIRECCIÓN ESTÁTICA EXTERNA*.
 - Se cambian los parámetros para crear la dirección IP elástica.  Se asigna el nombre de la IP, se selecciona la Versión de IP como IPv4 y se asigna la instancia creada anteriormente.
 - Se da click en *RESERVAR*.
+<img width="766" alt="2 elastica" src="https://user-images.githubusercontent.com/60080916/190926666-efd4b474-09e4-46b8-8fcf-f564f5eed82a.PNG">
 
 Configurar los registros DNS en GCP:
 - Se ingresa a GCP (console.cloud.google.com).
@@ -65,11 +67,14 @@ Configurar los registros DNS en GCP:
 - Se da click en "CREAR ZONA".
 - Se configuran los parámetros de la zona.
 - En *AGREGAR CONJUNTO DE REGISTROS* se deben crear los registros A y CNAME (posteriormente se tendrá que crear el TXT).
+<img width="726" alt="3 registros" src="https://user-images.githubusercontent.com/60080916/190926678-07db2c95-daf5-4272-b94a-ddde1aaafa4b.PNG">
 
 Configurar los servidores de nombres en Freenom:
 - Nos ubicamos en la administración del dominio.
 - Se selecciona "Use custom nameservers (enter below)".
 - Se agregan los dominios NS que nos brinda GCP.
+<img width="732" alt="4 1 txt" src="https://user-images.githubusercontent.com/60080916/190926691-deefe49d-afd4-4e80-bffa-56e2f04ca7d8.PNG">
+<img width="945" alt="4 2 freenom" src="https://user-images.githubusercontent.com/60080916/190926694-5e510441-2ac5-417f-bbc7-3b941c2baec8.PNG">
 
 
 ## Como se lanza el servidor
@@ -190,10 +195,15 @@ docker-compose up --build -d
 
 
 ## Como un usuario lo utilizaría
-El usuario solo debe acceder a la URL https://danielanino.tk desde cualquier browser.
+El usuario solo debe acceder a la URL https://www.danielanino.tk desde cualquier browser.
 
 
 ## Resultados
+Podemos ver que la URL empieza por https://
+<img width="960" alt="5 pagina" src="https://user-images.githubusercontent.com/60080916/190926718-9cf081d5-0530-446b-98c3-e3f326e90367.PNG">
+
+Podemos ver el certificado SSL:
+<img width="960" alt="6 ssl" src="https://user-images.githubusercontent.com/60080916/190926736-a28dfcd8-6c93-40ff-80af-0e7b0c99ac5c.PNG">
 
 
 # 5. Información relevante
