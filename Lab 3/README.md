@@ -78,6 +78,7 @@ Configurar los servidores de nombres en Freenom:
 
 
 ## Como se lanza el servidor
+### Opción 1
 Para ingresar a la máquina virtual, nos debemos conectar por SSH:
 - Se ingresa a GCP (console.cloud.google.com).
 - Se da click en el *Menú de navegación*.
@@ -85,6 +86,14 @@ Para ingresar a la máquina virtual, nos debemos conectar por SSH:
 - Se da click en *Instancias de VM*.
 - Buscamos nuestra instancia y damos click en *SSH*.
 <img width="731" alt="Captura" src="https://user-images.githubusercontent.com/60080916/190928740-5c0c5b2f-9a53-47d3-9a5d-7865409a3ef3.PNG">
+
+### Opción 2
+Para ingresar a la máquina virtual, nos debemos conectar por SSH:
+- Tenemos que tener descargada la clave con la que está asociada nuestra instancia.
+- Entramos a la terminal de nuestro computador.
+- En la terminal, nos ubicamos en la carpeta donde se encuentra nuestra clave.
+- Ejecutamos el comando: ```ssh -i dxninob dxninob@35.209.90.230```
+<img width="942" alt="a" src="https://user-images.githubusercontent.com/60080916/191075785-dfabe6a1-e065-4148-b242-d69ac5126b2f.PNG">
 
 
 ## Detalles del desarrollo
