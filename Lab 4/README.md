@@ -23,10 +23,8 @@ Desplegar un CMS wordpress empleando la tecnología de contenedores, con un nomb
 Todo lo propuesto ha sido implementado.
 
 
-
 # 2. Información general de diseño
-Se usaron contenedores Docker para la instalación de Wordpress, nginx y MySQL en la máquina virtual.
-
+Se usaron contenedores Docker para la instalación de Wordpress, Nginx y MySQL en la máquina virtual.
 
 
 # 3. Descripción del ambiente de desarrollo, técnico y de ejecución
@@ -34,6 +32,7 @@ Se usaron contenedores Docker para la instalación de Wordpress, nginx y MySQL e
 - IP elástica: 35.208.215.54
 - Nombre de dominio: lab4.danielanino.tk
 - Dominio con certificación SSL: https://lab4.danielanino.tk
+
 
 ## Detalles técnicos
 - GCP: se usó para desplegar una máquina virtual.
@@ -44,6 +43,7 @@ Se usaron contenedores Docker para la instalación de Wordpress, nginx y MySQL e
 - NFS kernel server: se usó para hacer el servidor NFS.
 - NFS common: se usó para vincular los wordpress con el servidor NFS.
 
+
 ## Descripción y como se configura el proyecto
 Se deben crear cinco VM en GCP.  Cada una se crea así:
 - Se ingresa a GCP (console.cloud.google.com).
@@ -53,6 +53,7 @@ Se deben crear cinco VM en GCP.  Cada una se crea así:
 - Se da click en *CREAR INSTANCIA*.
 - Se configura el nombre de la instancia, se elige el tipo de máquina ec2-micro y se habilita el tráfico HTTP y HTTPS.
 - Se da click en *CREAR*.
+<img width="731" alt="Intancias GCP" src="https://user-images.githubusercontent.com/60080916/196823738-f12b1fba-b3f7-4c63-83b1-489827d7e66c.PNG">
 
 Se configura la IP elástica para cada una de las VM.  Cada IP elástica se configura así:
 - Se ingresa a GCP (console.cloud.google.com).
@@ -62,6 +63,7 @@ Se configura la IP elástica para cada una de las VM.  Cada IP elástica se conf
 - Se da click en *RESERVAR DIRECCIÓN ESTÁTICA EXTERNA*.
 - Se cambian los parámetros para crear la dirección IP elástica.  Se asigna el nombre de la IP, se selecciona la Versión de IP como IPv4 y se asigna la instancia creada anteriormente.
 - Se da click en *RESERVAR*.
+<img width="781" alt="IPs elasticas" src="https://user-images.githubusercontent.com/60080916/196823771-a414e76b-2e4f-4c61-aae7-3f6956c8040f.PNG">
 
 Para la VM del balanceador de cargas, se configuran los registros DNS en GCP:
 - Se ingresa a GCP (console.cloud.google.com).
@@ -70,6 +72,7 @@ Para la VM del balanceador de cargas, se configuran los registros DNS en GCP:
 - Se da click en "CREAR ZONA".
 - Se configuran los parámetros de la zona.
 - En *AGREGAR CONJUNTO DE REGISTROS* se deben crear los registros A y CNAME (posteriormente se tendrá que crear el TXT).
+<img width="754" alt="DNS" src="https://user-images.githubusercontent.com/60080916/196823810-196143dd-cf87-4bc1-8dcc-d7fdd2dee1b7.PNG">
 
 Configurar los servidores de nombres en Freenom:
 - Nos ubicamos en la administración del dominio.
@@ -77,6 +80,7 @@ Configurar los servidores de nombres en Freenom:
 - Se agregan los dominios NS que nos brinda GCP.
 <img width="732" alt="4 1 txt" src="https://user-images.githubusercontent.com/60080916/190926691-deefe49d-afd4-4e80-bffa-56e2f04ca7d8.PNG">
 <img width="945" alt="4 2 freenom" src="https://user-images.githubusercontent.com/60080916/190926694-5e510441-2ac5-417f-bbc7-3b941c2baec8.PNG">
+
 
 ## Como se lanza el servidor
 ### Opción 1
@@ -86,6 +90,7 @@ Para ingresar a la máquina virtual, nos debemos conectar por SSH:
 - Se da click en *Compute Engine*.
 - Se da click en *Instancias de VM*.
 - Buscamos nuestra instancia y damos click en *SSH*.
+<img width="743" alt="SSH" src="https://user-images.githubusercontent.com/60080916/196824182-4f2f5d03-b778-4f62-9f54-dc1fc96295be.PNG">
 
 ### Opción 2
 Para ingresar a la máquina virtual, nos debemos conectar por SSH:
@@ -93,6 +98,7 @@ Para ingresar a la máquina virtual, nos debemos conectar por SSH:
 - Entramos a la terminal de nuestro computador.
 - En la terminal, nos ubicamos en la carpeta donde se encuentra nuestra clave.
 - Ejecutamos el comando: ```ssh -i dxninob dxninob@dirIP```
+
 
 ## Detalles del desarrollo
 ### 1. Balanceador de Cargas
@@ -473,10 +479,14 @@ El usuario solo debe acceder a la URL https://lab4.danielanino.tk desde cualquie
 ## Resultados
 Podemos ver el certificado SSL
 
-Podemos ingresas al Wordpress desde dos direcciones IP diferentes
+
+<img width="960" alt="SSL" src="https://user-images.githubusercontent.com/60080916/196825267-f1f4f285-e136-45ca-b9dc-8919a9ed0d8b.PNG">
+
+Podemos ingresas al Wordpress desde dos direcciones IP diferentes (si hacemos un cambio en un Wordpress, se hace automaticamente solo en el otro Wordpress)
 
 
-Si hacemos un cambio en un Wordpress, se hace automaticamente solo en el otro Wordpress
+<img width="960" alt="WP1" src="https://user-images.githubusercontent.com/60080916/196825417-8f29c73d-e47f-40be-82a6-310f98936adb.PNG">
+<img width="960" alt="WP2" src="https://user-images.githubusercontent.com/60080916/196825418-08cb70f3-b96b-4e0c-bca1-53a5471c47b0.PNG">
 
 
 # 5. Información relevante
