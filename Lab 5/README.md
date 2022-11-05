@@ -22,6 +22,11 @@ Entramos a la carpeta del lab 5.3:
 cd "ST0263-TopicosTelematica/Lab 5/Lab 5.3"
 ```
 
+Instalamos MRJOB:
+```
+pip install mrjob
+```
+
 Usamos el siguiente comando para ejecutar los ejercicios del punto 1, remplazando la X por el ejercicio que se quiere ejecutar:
 ```
 python files/punto1/pX.py datasets/dataempleados.csv
