@@ -22,7 +22,7 @@ Todo ha sido implementado.
 # 2. Información general de diseño de alto nivel, arquitectura, patrones, mejores prácticas utilizadas.
 ## Punto 1
 En AWS se hizo uso del servicio ERM para la creación del cluster y del servicio S3 para la creación de buckets.
-## Punto 1
+## Punto 2
 En AWS se hizo uso del servicio ERM para la creación del cluster y del servicio S3 para la creación de buckets.
 ## Punto 3
 Se usaron clases y objetos para el código de los ejercicos.
