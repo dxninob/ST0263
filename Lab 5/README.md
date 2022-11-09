@@ -13,15 +13,17 @@ Realizar las actividades propuestas en un cluster ERM de AWS y los ejercicios de
 
 ## 1.1. Aspectos desarrollados de la actividad propuesta
 - Punto 1: Crear un cluster EMR, activar Hue y hacer uso de Jupyter y Zeppelin.
+- Punto 2: En un cluster ERM realizar la separación en los directorios hdfs o en los buckets de S3.
 - Punto 3: Realizar los ejercicios propuestos de MapReduce con MRJOB en Python.
 
 ## 1.1. Aspectos NO desarrollados de la actividad propuesta
-- Punto 2: En un cluster ERM realizar la separación en los directorios hdfs o en los buckets de S3.
-
+Todo ha sido implementado.
 
 # 2. Información general de diseño de alto nivel, arquitectura, patrones, mejores prácticas utilizadas.
 ## Punto 1
-En AWS se hizo uso del servicio ERM para la creación del cluster y del servicio S3 para la creación del bucket.
+En AWS se hizo uso del servicio ERM para la creación del cluster y del servicio S3 para la creación de buckets.
+## Punto 1
+En AWS se hizo uso del servicio ERM para la creación del cluster y del servicio S3 para la creación de buckets.
 ## Punto 3
 Se usaron clases y objetos para el código de los ejercicos.
 
@@ -51,7 +53,7 @@ Para este ejercicio fueron usadas las siguientes herramientas:
 
 - Esperamos a que el cluster se cree, esto demora al rededor de 20 minutos, luego de que esté listo podemos continuar con los siguientes pasos.
 
-### Detalles del desarrollo.
+### Detalles del desarrollo
 - En el servicio EMR de AWS, le damos click a nuestro cluster y en la pestaña *Resumen*, encontramos el comando para conectarnos al cluster por SSH.
 <img width="790" alt="resumen ssh" src="https://user-images.githubusercontent.com/60080916/200110435-c821a98f-0061-4c13-a156-3bf0bfb03cc3.PNG">
 
@@ -91,13 +93,95 @@ hdfs dfs -ls /user
 <img width="960" alt="13 hue jupyter" src="https://user-images.githubusercontent.com/60080916/200108257-e5a6a8a8-ae20-41b8-953c-43090d2d4201.PNG">
 
 
+
+
+
+
+## Punto 2
+### Detalles técnicos
+Para este ejercicio fueron usadas las siguientes herramientas:
+- AWS: se usó para la creación del cluster ERM.
+- Hue: se usó para la gestión de Hadoo.
+
+### Detalles del desarrollo
+#### Pasar archivos del cluster a Hue
+- Entramos al nodo master como fue explicado anteriormente.
+- Ejecutamos el siguiente comando:
+```
+sudo su
+```
+- Probamos los siguientes comandos para ver el contenido que existe en Hue.
+```
+hdfs dfs -ls /
+hdfs dfs -ls /user
+hdfs dfs -ls /user/hadoop
+```
+- Creamos las siguientes carpetas ye entramos:
+```
+mkdir /datasets
+mkdir /datasets/otros
+cd /datasets/otros
+```
+- Creamos los archivos datapeliculas.txt, dataempresas.txt y dataempleados.txt manualmente.
+- Creamos el directorio datasets en Hue.
+```
+hdfs dfs -mkdir /user/hadoop/datasets
+```
+- Copiamos los archivos creados anteriormente a Hue.
+```
+hdfs dfs -put /datasets/otros/*.txt /user/hadoop/datasets
+hdfs dfs -copyFromLocal /datasets/otros/*.txt /user/hadoop/datasets
+```
+- Podemos ver que los archivos que estaban en la instancia ahora están en Hue.
+<img width="691" alt="1" src="https://user-images.githubusercontent.com/60080916/200752234-60352c08-e592-4d66-9cab-7dded7e6d5ef.PNG">
+
+
+
+#### Pasar archivos de Hue al cluster
+- Creamos el directorio mis_datasets:
+```
+mkdir /mis_datasets
+```
+- Copiamos los archivos de Hue a la instancia en la carpeta mis_datasets.
+```
+hdfs dfs -get /user/hadoop/datasets/*.txt /mis_datasets
+hdfs dfs -copyToLocal /user/hadoop/datasets/*.txt /mis_datasets
+```
+- Ahora podemos ver que los archivos de Hue están en la instancia con el siguiente comando:
+```
+ls -l mis_datasets
+```
+
+#### Pasar archivos de Hue a AWS S3
+- Entramos a S3 en Hue y creamos un Bucket.
+<img width="906" alt="3" src="https://user-images.githubusercontent.com/60080916/200750881-360fc1ad-e336-4c33-a437-701da3d65ce7.PNG">
+
+- Damos click en upload y subimos los archivos datapeliculas.txt, dataempresas.txt y dataempleados.txt, debería quedar así:
+<img width="691" alt="4" src="https://user-images.githubusercontent.com/60080916/200750888-46a90562-9c4c-4e2c-9bd4-0a5ea6fda935.PNG">
+
+- Ingresamos a AWS al servicio S3 y debemos ver el bucket con los respectivos archivos.
+<img width="762" alt="5" src="https://user-images.githubusercontent.com/60080916/200750892-13addfdd-67a1-4de4-a484-69fcc9e6b60e.PNG">
+
+#### Pasar archivos del cluster a AWS S3
+- Creamos un bucket en AWS S3.
+<img width="733" alt="7" src="https://user-images.githubusercontent.com/60080916/200752044-cb87601b-2a0b-4924-a2de-6d66498156ca.PNG">
+
+- Ejecutamos los siguientes comandos en la instancia:
+```
+aws s3 cp /datasets/otros/datapeliculas.txt s3://lab5v2dxninob
+aws s3 cp /datasets/otros/dataempresas.txt s3://lab5v2dxninob
+aws s3 cp /datasets/otros/dataempleados.txt s3://lab5v2dxninob
+```
+- Entramos a AWS S3 y podemos ver que los archivos se encuntran allí.
+<img width="759" alt="8" src="https://user-images.githubusercontent.com/60080916/200752048-154bf5d3-bd88-4522-9b3a-786d2ff0fc00.PNG">
+
+
 ## Punto 3
 ### Detalles técnicos
 - Python: se usó python como lenguaje de programación para la solución.
 - MRJOB: se usó esta librería para el uso de MapReduce en Pyhton.
-- 
-### Como se compila y ejecuta.
 
+### Como se compila y ejecuta.
 - Clonamos el repositorio
 ```
 git clone https://github.com/dxninob/ST0263-TopicosTelematica.git
