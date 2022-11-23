@@ -36,6 +36,9 @@ Todos fue desarrollado.
 
 # 3. Descripción del ambiente de desarrollo y técnico
 ## Detalles del desarrollo
+- URI datos de entrada: s3://dxninob-p3/datasets/
+- URI datos de salida: s3://dxninob-p3/resultados/
+
 ### **Almacenar los datos en Google Drive**
 - Descargamos el repositorio de la materia en ZIP.
 <img width="626" alt="zip" src="https://user-images.githubusercontent.com/60080916/203452229-28adcdd6-0b60-448f-bae5-78acdd2d84dd.PNG">
